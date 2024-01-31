@@ -33,6 +33,14 @@ public class Persona {
         this.age = age;
     }
 
+    public Persona(long id, String name, String surname, int age) {
+
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+    }
+
     public long getId() {
         return id;
     }
@@ -77,7 +85,7 @@ public class Persona {
 		a.add(new Persona("Livio"		, "Yang"		, 18));
 		a.add(new Persona("Lorenzo"	, "Lasagni"		, 18));
 		a.add(new Persona("Matteo"		, "Mureddu"		, 18));
-		a.add(new Persona("Mattia"		, "Tinacci"		, 18));
+		a.add(new Persona("Matteo"		, "Tinacci"		, 18));
 		a.add(new Persona("Niccolò"	, "Burrini"		, 18));
 		a.add(new Persona("Paolo"		, "Brogi"		, 19));
 		a.add(new Persona("Samuele"	, "Rosselli"	, 18));

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,13 @@ public class PersonaController {
         return personaRepository.findAll().toString();
     }
 
+    @PutMapping("/reset")
+    public void resetPersone() {
+
+        personaRepository.deleteAll();
+        personaRepository.saveAll(Persona.personeInClasse());
+    }
+
     @GetMapping("/{id}")
     public String getRequestSingola(@PathVariable("id") long id) {
         return personaRepository.findById(id).toString();
@@ -41,5 +49,12 @@ public class PersonaController {
     @DeleteMapping("/{id}")
     public void deleteRequest(@PathVariable("id") long id) {
         personaRepository.deleteById(id);
+    }
+
+    @PutMapping("/{id}/{nome}/{cognome}/{eta}")
+    public String putRequest(@PathVariable("id") long id, @PathVariable("nome") String nome, @PathVariable("cognome") String cognome, @PathVariable("eta") int eta) {
+        
+        personaRepository.deleteById(id);
+        return personaRepository.save(new Persona(id, nome, cognome, eta)).toString();
     }
 }
