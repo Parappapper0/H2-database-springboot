@@ -23,9 +23,6 @@ public class PersonaController {
     @GetMapping("")
     public String getRequestPersone() {
 
-        if (personaRepository.count() == 0)
-            personaRepository.saveAll(Persona.personeInClasse());
-
         return personaRepository.findAll().toString();
     }
 
@@ -37,13 +34,13 @@ public class PersonaController {
     }
 
     @GetMapping("/{id}")
-    public String getRequestSingola(@PathVariable("id") long id) {
-        return personaRepository.findById(id).toString();
+    public Persona getRequestSingola(@PathVariable("id") long id) {
+        return personaRepository.findById(id).get();
     }
 
     @PostMapping("")
-    public String postRequest(@RequestBody Persona p) {
-        return personaRepository.save(p).toString();
+    public Persona postRequest(@RequestBody Persona p) {
+        return personaRepository.save(p);
     }
 
     @DeleteMapping("/{id}")
@@ -51,10 +48,11 @@ public class PersonaController {
         personaRepository.deleteById(id);
     }
 
-    @PutMapping("/{id}/{nome}/{cognome}/{eta}")
-    public String putRequest(@PathVariable("id") long id, @PathVariable("nome") String nome, @PathVariable("cognome") String cognome, @PathVariable("eta") int eta) {
+    @PutMapping("/{id}")
+    public Persona putRequest(@RequestBody Persona p, @PathVariable("id") long id) {
         
-        personaRepository.deleteById(id);
-        return personaRepository.save(new Persona(id, nome, cognome, eta)).toString();
+        p.setId(id);
+        return personaRepository.save(p);
+
     }
 }
