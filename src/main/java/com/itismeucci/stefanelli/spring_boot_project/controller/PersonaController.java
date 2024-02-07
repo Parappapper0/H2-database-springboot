@@ -29,6 +29,12 @@ public class PersonaController {
         return name == null || name.trim().isEmpty() ? personaRepository.findAll() : personaRepository.findByName(name);
     }
 
+    @GetMapping("like")
+    public List<Persona> getRequestPersoneLike(@RequestParam(name = "name", required = true) String name) {
+
+        return personaRepository.findByNameContaining(name);
+    }
+
     @PutMapping("/reset")
     public void resetPersone() {
 
